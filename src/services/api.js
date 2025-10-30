@@ -1,11 +1,7 @@
-const API_BASE_URL = 'http://backend:5000';
-
 export async function fetchUsers() {
-  const res = await fetch(`${API_BASE_URL}/api/users`);
-
-  if (!res.ok) {
+  const response = await fetch('http://localhost:4000/api/users');
+  if (!response.ok) {
     throw new Error('Failed to fetch users');
   }
-
-  return res.json();
+  return response.json();
 }
