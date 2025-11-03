@@ -2,21 +2,24 @@
 
 This is a simple React application that fetches and displays a list of users from a backend API.
 
-It is part of a hands-on project used in my Docker Networking tutorial on Dev.to:
+It is part of a hands-on project used in my Docker Networking tutorial on [Dev.to]():
 
 ## What this app does
 
 - Fetches users from a backend API
 - Displays them in a clean, simple UI
 - Uses a modern file structure (`components/`, `services/`)
-- Prepares you for containerizing frontend/backend projects with Docker
+- Supports `.env` config for clean API setup
+- Containerized and served using Nginx for production
+- Demonstrates Docker networking with a frontend-backend setup
 
 
 ## Prerequisites
 
-- Node.js (v18+ recommended)
+- Node.js (v18+ recommended for local dev)
 - NPM
 - Basic React knowledge (optional but helpful)
+- Docker (optional, if following the containerization section)
 
 
 ## How to run locally
@@ -38,15 +41,28 @@ It is part of a hands-on project used in my Docker Networking tutorial on Dev.to
 4. Visit the app in your browser: http://localhost:5173
 
 
+## Environment variables
+This project uses a `.env` file to set the API base URL:
+
+```env
+VITE_API_BASE_URL=http://localhost:4000
+```
+When containerized, this value is updated to use a relative path (e.g., /api) and the request is proxied via Nginx.
+
+
 ## Docker context
 
-In the Docker project, this app is:
+In the Docker section of the project, this app is:
 
-- Containerized using a Dockerfile
+- Built with a multi-stage Dockerfile using `node:22` and `nginx`
 
-- Connected to a backend Node.js API container using Docker networking
+- Served using Nginx in a lightweight, production-optimized container
 
-- Communicates with the backend using internal container DNS (http://backend:5000)
+- Connected to a backend container over a shared Docker network
+
+- Communicates with the backend using container DNS (http://backend:4000)
+
+- Uses a relative path (/api) with Nginx proxy rules in production
 
 
 ## Folder structure
@@ -55,7 +71,7 @@ src/
 ├── components/
 │   └── UserList.jsx      # UI component to display users
 ├── services/
-│   └── api.js            # Fetch users from backend
+│   └── api.js            # Handles API calls using VITE_API_BASE_URL
 ├── App.jsx               # Root component
 └── main.jsx              # App entry point
 ```
@@ -64,10 +80,9 @@ src/
 ## Built with
 
 - [React 18](https://react.dev/)
-
 - [Vite](https://vite.dev/)
-
-- Modern functional components + hooks
+- Functional components + hooks
+- Docker + Nginx for containerized builds
 
 
 ## License
