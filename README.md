@@ -2,7 +2,7 @@
 
 This is a simple React application that fetches and displays a list of users from a backend API.
 
-It is part of a hands-on project used in my Docker Networking tutorial on [Dev.to]():
+It is part of a hands-on project used in my Docker Networking tutorial on [Dev.to](https://dev.to/deborahemeni1/docker-networking-how-to-connect-containers-in-a-full-stack-project-3l98):
 
 ## What this app does
 
